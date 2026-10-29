@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Όταν η εμπειρία δεν αρκεί</title>
+<style>
+:root {
+  --site-primary: #173b35;
+  --site-on-primary: #ffffff;
+  --site-secondary: #e5b66b;
+  --site-on-secondary: #202a25;
+  --site-background: #f5f2eb;
+  --site-on-background: #202a25;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Georgia, "Times New Roman", serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: light-dark(#ffffff, #1b2421);
+  --muted: light-dark(#5d6964, #b8c3bd);
+  --line: light-dark(#d9ded7, #3b4942);
+  --soft: light-dark(#eaf0e9, #25352e);
+}
+* { box-sizing: border-box; }
+html { color-scheme: light dark; scroll-behavior: smooth; }
+body { margin: 0; background: var(--site-background); color: var(--site-on-background); font-family: var(--site-font-body); line-height: 1.7; }
+#app { width: 100%; min-height: 100vh; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; }
+a { color: inherit; }
+.hero { background: var(--site-primary); color: var(--site-on-primary); padding: calc(76px * var(--site-spacing-scale)) 22px calc(64px * var(--site-spacing-scale)); position: relative; overflow: hidden; }
+.hero:after { content: ""; position: absolute; width: 360px; height: 360px; border: 1px solid currentColor; border-radius: 50%; right: -110px; top: -150px; opacity: calc(.13 * var(--site-decoration-opacity)); pointer-events: none; }
+.wrap { max-width: 1060px; margin: 0 auto; }
+.kicker { text-transform: uppercase; letter-spacing: .16em; font-size: .76rem; font-weight: 750; color: var(--site-secondary); }
+h1,h2,h3 { font-family: var(--site-font-heading); font-weight: 600; line-height: 1.16; }
+h1 { font-size: clamp(2.6rem, 6vw, calc(5rem * var(--site-heading-scale))); max-width: 850px; margin: 22px 0; letter-spacing: -.035em; }
+.hero p { font-size: clamp(1.05rem, 2vw, 1.25rem); max-width: 720px; color: #e5ebe6; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pill { border: 1px solid #ffffff4a; padding: 6px 12px; border-radius: 999px; font-size: .82rem; }
+nav { background: var(--surface); border-bottom: 1px solid var(--line); }
+.nav-inner { max-width: 1060px; margin: auto; padding: 12px 22px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+nav a { font-size: .88rem; text-decoration: none; color: var(--muted); }
+nav a:hover { color: var(--site-primary); text-decoration: underline; }
+main { max-width: 1060px; padding: 52px 22px 80px; margin: auto; }
+.intro { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(240px, .65fr); gap: 34px; align-items: start; margin-bottom: 54px; }
+.intro h2 { font-size: clamp(1.8rem, 3vw, calc(2.5rem * var(--site-heading-scale))); margin: 0 0 16px; }
+.intro p { margin-top: 0; }
+.pullquote { padding: 25px; background: var(--soft); border-left: 4px solid var(--site-secondary); border-radius: calc(4px * var(--site-radius-scale)); font-family: var(--site-font-heading); font-size: 1.25rem; line-height: 1.5; }
+.section-head { margin: 58px 0 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); display: flex; align-items: end; gap: 20px; }
+.section-number { font-family: var(--site-font-heading); color: var(--site-secondary); font-size: 2.4rem; line-height: 1; }
+.section-head h2 { margin: 0; font-size: clamp(1.6rem, 3vw, calc(2.25rem * var(--site-heading-scale))); }
+.story-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.story { background: var(--surface); border: 1px solid var(--line); border-radius: calc(12px * var(--site-radius-scale)); padding: 25px; box-shadow: 0 8px 26px #1a2d2210; }
+.story .tag { color: var(--site-primary); background: var(--soft); display: inline-block; padding: 4px 9px; border-radius: 4px; font-size: .75rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+.story h3 { font-size: 1.45rem; margin: 14px 0 10px; }
+.story p { margin: 0 0 12px; }
+.story p:last-child { margin-bottom: 0; }
+.story strong { color: var(--site-primary); }
+.wide-story { margin-top: 18px; }
+.note { border: 1px solid var(--line); padding: 22px 24px; border-radius: calc(10px * var(--site-radius-scale)); margin-top: 24px; color: var(--muted); }
+.note strong { color: var(--site-on-background); }
+.big-question { background: var(--site-primary); color: var(--site-on-primary); border-radius: calc(14px * var(--site-radius-scale)); padding: clamp(28px, 5vw, 52px); margin-top: 62px; }
+.big-question .kicker { color: var(--site-secondary); }
+.big-question h2 { font-size: clamp(2rem, 4vw, calc(3.1rem * var(--site-heading-scale))); margin: 14px 0 20px; }
+.big-question p { max-width: 790px; color: #e5ebe6; }
+footer { padding: 28px 22px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+@media (max-width: 700px) { .intro, .story-grid { grid-template-columns: 1fr; } main { padding-top: 36px; } .hero { padding-top: 56px; } .section-head { align-items: start; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div id="app" data-sites-preview-theme="custom">
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Προσωπική μαρτυρία · Αγορά εργασίας</div>
+    <h1>Όταν η εμπειρία δεν αρκεί</h1>
+    <p>Προσωπικές εμπειρίες από την αναζήτηση εργασίας μετά τα 40 — και ερωτήματα για την ηλικία, τα κριτήρια επιλογής και τις πραγματικές ίσες ευκαιρίες.</p>
+    <div class="hero-meta"><span class="pill">47 ετών</span><span class="pill">15 χρόνια τεχνικής εμπειρίας</span><span class="pill">Αναζήτηση εργασίας σε διαφορετικούς τομείς</span></div>
+  </div>
+</header>
+<nav aria-label="Περιεχόμενα"><div class="nav-inner"><a href="#context">Η αφετηρία</a><a href="#experience">Οι εμπειρίες</a><a href="#questions">Τα ερωτήματα</a><a href="#closing">Η συζήτηση</a></div></nav>
+<main>
+<section class="intro" id="context">
+  <div>
+    <div class="kicker">Η αφετηρία</div>
+    <h2>Δεν ζητώ χάρη. Ζητώ να αξιολογούμαι για αυτό που μπορώ να προσφέρω.</h2>
+    <p>Είμαι 47 ετών και έχω περίπου 15 χρόνια επαγγελματικής εμπειρίας ως τεχνικός υπολογιστών, δικτύων και τηλεπικοινωνιών. Έχω επίσης σπουδάσει Web Development και συνεχίζω να προσπαθώ να βρω εργασία.</p>
+    <p>Επειδή οι ευκαιρίες στον τεχνικό τομέα είναι περιορισμένες για μένα, αναζητώ και θέσεις σε διαφορετικούς κλάδους. Προσαρμόζω το βιογραφικό μου ανάλογα με τη θέση και είμαι πρόθυμος να μάθω καινούργια πράγματα. Ωστόσο, αρκετές εμπειρίες με έχουν κάνει να αναρωτιέμαι αν όλοι οι υποψήφιοι κρίνονται με τα ίδια μέτρα και σταθμά.</p>
+  </div>
+  <aside class="pullquote">«Αν μια θέση δεν απαιτεί εμπειρία, γιατί η προηγούμενη επαγγελματική μου διαδρομή μοιάζει με εμπόδιο;»</aside>
+</section>
+<section id="experience">
+  <div class="section-head"><span class="section-number">01</span><h2>Όταν προσπαθώ να αλλάξω επαγγελματικό δρόμο</h2></div>
+  <div class="story-grid">
+    <article class="story"><span class="tag">Εργοστάσιο</span><h3>«Δεν χρειάζεται εμπειρία, θα σας εκπαιδεύσουμε»</h3><p>Τηλεφώνησα για θέση ανειδίκευτου εργάτη. Μου είπαν ότι δεν απαιτούνταν εμπειρία και ότι θα υπήρχε εκπαίδευση. Όταν ρωτήθηκα για το επαγγελματικό μου παρελθόν και ανέφερα ότι είμαι τεχνικός υπολογιστών, δικτύων και τηλεπικοινωνιών, η αντίδραση ήταν ένα έντονο: «Όχι, όχι, δεν θέλουμε κάτι τέτοιο!»</p><p>Εξήγησα ότι ενδιαφερόμουν για τη θέση εργάτη, όχι για θέση τεχνικού. Μου ζήτησαν να στείλω βιογραφικό και είπαν ότι θα το εξετάσουν. Δεν επικοινώνησαν ξανά.</p></article>
+    <article class="story"><span class="tag">Ιατρικές υπηρεσίες</span><h3>Η αλλαγή στη στάση μετά την ηλικία</h3><p>Σε συνέντευξη για θέση γραφείου σε γνωστή εταιρεία ιατρικών υπηρεσιών, με ρώτησαν το όνομα, την ηλικία και την περιοχή κατοικίας μου. Έμενα κοντά στον χώρο εργασίας.</p><p>Όταν ανέφερα την ηλικία μου, παρατήρησα αλλαγή στη στάση του συνομιλητή μου. Στη συνέχεια μου είπε ότι μάλλον θα έπρεπε να αναζητήσω εργασία στην ειδικότητά μου. Εξήγησα ότι στρέφομαι και σε άλλους τομείς επειδή δεν βρίσκω εργασία στον δικό μου.</p></article>
+    <article class="story"><span class="tag">Θέση γραφείου</span><h3>«Κοιτάξτε στον δικό σας τομέα»</h3><p>Σε εταιρεία που ασχολείται με συστήματα CRM και εμπορικό λογισμικό, διεκδίκησα θέση υπαλλήλου γραφείου με βιογραφικό προσαρμοσμένο στα καθήκοντα της θέσης. Και εκεί μου είπαν να αναζητήσω εργασία στην ειδικότητά μου.</p><p>Έτσι δημιουργείται ένα παράδοξο: όταν ψάχνω στη δική μου ειδικότητα, οι ευκαιρίες είναι ελάχιστες· όταν προσπαθώ να αλλάξω κατεύθυνση, η προηγούμενη ειδικότητά μου φαίνεται να με ακολουθεί ως εμπόδιο.</p></article>
+    <article class="story"><span class="tag">Διάθεση για μάθηση</span><h3>Πότε είναι απαραίτητο το πτυχίο;</h3><p>Σε μία συνέντευξη, μου είπαν ότι απαιτείται πανεπιστημιακό πτυχίο και η υποψηφιότητά μου απορρίφθηκε επειδή δεν το διαθέτω. Σε άλλη περίπτωση, ο εργοδότης εξήγησε ότι δεν αναζητούσε κάποιον με υψηλό ακαδημαϊκό προφίλ, αλλά άνθρωπο με διάθεση να μάθει. Του είπα ότι αυτή τη διάθεση την έχω.</p><p>Φυσικά, κάθε θέση μπορεί να έχει πραγματικές και συγκεκριμένες απαιτήσεις. Το ερώτημα είναι αν αυτές εφαρμόζονται με συνέπεια και αν αξιολογούνται παράλληλα οι δεξιότητες και η δυνατότητα εξέλιξης.</p></article>
+  </div>
+  <div class="story wide-story"><span class="tag">Μετακίνηση</span><h3>Όταν η απόσταση τελικά φαίνεται να μετράει</h3><p>Σε ορισμένες περιπτώσεις με ρωτούν πώς θα πηγαίνω στη δουλειά, επειδή δεν οδηγώ και ο χώρος εργασίας βρίσκεται μακριά. Αρχικά μου λένε ότι αυτό δεν αποτελεί πρόβλημα, όμως στη συνέχεια δεν επικοινωνούν ξανά μαζί μου.</p><p>Αν η μετακίνηση είναι ουσιαστική προϋπόθεση, θα προτιμούσα να το γνωρίζω εξαρχής. Όταν όμως αρχικά ακούω ότι δεν υπάρχει πρόβλημα και μετά η επικοινωνία διακόπτεται, μένω με την απορία αν τελικά αυτό επηρέασε την επιλογή.</p></div>
+  <div class="section-head"><span class="section-number">02</span><h2>Όσα μένουν αναπάντητα</h2></div>
+  <div class="story-grid">
+    <article class="story"><span class="tag">Επικοινωνία</span><h3>«Στείλτε το βιογραφικό σας και θα σας καλέσουμε»</h3><p>Έχω ακούσει πολλές φορές αυτή τη φράση. Στέλνω το βιογραφικό, περιμένω, αλλά η επικοινωνία δεν έρχεται ποτέ. Καταλαβαίνω ότι δεν μπορεί να επιλεγούν όλοι οι υποψήφιοι. Μια σύντομη ενημέρωση, όμως, θα έδινε τουλάχιστον ένα σαφές τέλος στην αναμονή.</p></article>
+    <article class="story"><span class="tag">Προσωπικές ερωτήσεις</span><h3>«Είστε παντρεμένος; Έχετε παιδιά;»</h3><p>Σε άλλη συνέντευξη με ρώτησαν αν είμαι παντρεμένος και αν έχω παιδιά, πριν συνεχιστεί η συζήτηση. Δεν μπορώ να γνωρίζω τι επιδίωκε ο εργοδότης με αυτές τις ερωτήσεις. Πιστεύω, όμως, ότι η αξιολόγηση πρέπει να επικεντρώνεται στις δεξιότητες, στη διαθεσιμότητα και στην ικανότητα κάποιου να ανταποκριθεί στα καθήκοντα.</p></article>
+    <article class="story"><span class="tag">Ηλικία και ευκαιρίες</span><h3>Η εμπειρία ως πλεονέκτημα — ή ως προκατάληψη;</h3><p>Έχω δει νεότερους ανθρώπους να βρίσκουν εργασία χωρίς προηγούμενη εμπειρία, απλώς ρωτώντας σε ένα κατάστημα ξηρών καρπών ή σε ένα internet café αν χρειάζονται κάποιον για μερική απασχόληση. Χαίρομαι όταν ένας νέος άνθρωπος βρίσκει δουλειά· δεν είναι οι νέοι το πρόβλημα.</p><p>Αυτό που με προβληματίζει είναι γιατί η έλλειψη εμπειρίας μπορεί να είναι αποδεκτή σε έναν νεότερο υποψήφιο, ενώ η πολυετής εμπειρία ενός μεγαλύτερου δεν αρκεί πάντα για να εξεταστεί σοβαρά η υποψηφιότητά του.</p></article>
+    <article class="story"><span class="tag">Προσωπικός προβληματισμός</span><h3>Δεν μπορώ να γνωρίζω τον λόγο κάθε απόρριψης</h3><p>Δεν μπορώ να αποδείξω ότι κάθε απόρριψη οφείλεται στην ηλικία. Ούτε θεωρώ ότι κάθε εργοδότης λειτουργεί με τον ίδιο τρόπο. Μπορώ, όμως, να περιγράψω όσα έχω βιώσει και να αναρωτηθώ αν, σε κάποιες περιπτώσεις, οι υποθέσεις για την ηλικία ή το επαγγελματικό παρελθόν επηρεάζουν την κρίση πριν αξιολογηθούν οι πραγματικές δυνατότητες.</p></article>
+  </div>
+</section>
+<section class="big-question" id="questions"><div class="kicker">Το κεντρικό ερώτημα</div><h2>Μιλάμε για ίσες ευκαιρίες. Τι συμβαίνει στην πράξη;</h2><p>Δεν ζητώ να παρακαμφθούν οι απαιτήσεις μιας θέσης ούτε να προσληφθώ μόνο και μόνο επειδή έχω εμπειρία ή δυσκολεύομαι να βρω εργασία. Ζητώ να αξιολογούμαι για όσα μπορώ να προσφέρω και να έχω την ευκαιρία να το αποδείξω.</p><p>Αν μου λείπει μια απαραίτητη δεξιότητα ή κάποιος άλλος υποψήφιος είναι καταλληλότερος, το καταλαβαίνω. Αυτό που με προβληματίζει είναι όταν η ηλικία, το προηγούμενο επάγγελμα, η μετακίνηση ή άλλα χαρακτηριστικά μοιάζουν να επηρεάζουν την κρίση χωρίς να εξηγείται καθαρά πώς συνδέονται με τη θέση.</p><p><strong>Μήπως η αγορά εργασίας μιλά για εμπειρία, ευελιξία και διάθεση για μάθηση, αλλά στην πράξη δεν δίνει σε όλους την ίδια ευκαιρία να τις αποδείξουν;</strong></p></section>
+<section id="closing" style="margin-top:48px"><div class="section-head"><span class="section-number">03</span><h2>Ας γίνει μια ουσιαστική συζήτηση</h2></div><p>Θα ήθελα να ακούσω τις εμπειρίες άλλων ανθρώπων που αναζητούν εργασία, αλλά και όσων συμμετέχουν στην επιλογή προσωπικού. Όχι για να στοχοποιήσουμε εργοδότες ή να αντιπαραθέσουμε τις γενιές, αλλά για να συζητήσουμε με ειλικρίνεια τι μπορεί να αλλάξει.</p><p>Η αξιολόγηση με σαφή κριτήρια, η ειλικρινής ενημέρωση των υποψηφίων και η ευκαιρία να αποδείξουν τις ικανότητές τους θα ήταν μια ουσιαστική αρχή.</p><p><strong>#ΑγοράΕργασίας &nbsp; #ΗλικιακέςΔιακρίσεις &nbsp; #Εργασία &nbsp; #ΊσεςΕυκαιρίες &nbsp; #ΑνθρώπινοΔυναμικό</strong></p><div class="note"><strong>Σημείωση:</strong> Το κείμενο αποτελεί προσωπική μαρτυρία και προβληματισμό. Οι εμπειρίες περιγράφονται από τη σκοπιά του υποψηφίου και δεν αποτελούν απόδειξη των κινήτρων κάθε εργοδότη.</div></section>
+</main>
+<footer><div class="wrap"><span>Προσωπική μαρτυρία για την αναζήτηση εργασίας</span><span>Εμπειρία · Αξιοπρέπεια · Ίσες ευκαιρίες</span></div></footer>
+</div>
+</body>
+</html>
